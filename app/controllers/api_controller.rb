@@ -88,7 +88,6 @@ class ApiController < ActionController::Base
     render json: { status: status, message: message, backtrace: backtrace }
   end
 
-
   def set_current_user
     @current_user ||= begin
       User.first
