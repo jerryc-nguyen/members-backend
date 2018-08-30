@@ -1,5 +1,5 @@
 class ActorSerializer < ActiveModel::Serializer
-  attributes  :id, :name, :formatted_address, :phone, :avatar_url
+  attributes  :id, :name, :formatted_address, :avatar_url
 
 end
 

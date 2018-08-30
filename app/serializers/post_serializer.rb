@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :name, :content, :thumb_url
+  attributes :id, :title, :content, :thumb_url
 
 end
 
