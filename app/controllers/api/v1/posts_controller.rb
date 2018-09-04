@@ -1,7 +1,7 @@
 class Api::V1::PostsController < ApiController
   def  index
-    psots = Post.all
-    success(data: psots)
+    posts = Post.includes(:user).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
+    success(data: posts)
   end
 
   private
