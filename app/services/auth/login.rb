@@ -4,13 +4,18 @@ class Auth::Login
 
   def initialize(params)
     @params = params
-    @provider = params[:provider]
-    @uid = params[:uid]
   end
 
   def login?
     begin
-      @user = find_or_create_user_from(params)
+
+      case params[:provider]
+      when "facebook"
+        oauth_params = fetch_fb_oauth_params
+        @user = find_or_create_user_from(oauth_params)
+      else
+        raise "Not implemented!"
+      end
 
       unless @user.valid?
         @message = @user.errors.full_messages.to_sentence
@@ -20,6 +25,30 @@ class Auth::Login
     rescue => e
       @message = e.message
       false
+    end
+  end
+
+  private
+
+  def fetch_fb_oauth_params
+    raise "Token is required." if params[:token].blank?
+
+    begin
+      graph = Koala::Facebook::API.new(params[:token])
+      data = graph.get_object('me', fields: ['id', 'name', 'email', 'birthday', 'gender', 'last_name', 'first_name', 'picture']).symbolize_keys
+      {
+        token: params[:token],
+        uid: data[:id],
+        provider: "facebook",
+        name: data[:name],
+        email: data[:email],
+        first_name: data[:first_name],
+        last_name: data[:last_name],
+        image: (data[:picture] || {}).fetch("data", {}).fetch("url", nil)
+      }
+    rescue => e
+      puts e.message
+      puts e.backtrace
     end
   end
 

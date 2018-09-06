@@ -20,12 +20,12 @@ class Api::V1::AuthController < ApiController
 
   def login_params
     params.permit(
-      :provider, :uid, :email, :name, :token, :refresh_token
+      :provider, :token
     )
   end
 
   def validate_login_params!
-    raise "oauth_params must contain: provider, uid, email, name" if (params.keys.map(&:to_sym) & [:provider, :uid, :email, :name]).length != 4
+    raise "oauth_params must contain: provider, token" if (params.keys.map(&:to_sym) & [:provider, :token]).length != 2
   end
 
 end
