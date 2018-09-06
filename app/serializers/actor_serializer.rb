@@ -1,11 +1,11 @@
 class ActorSerializer < ActiveModel::Serializer
-  attributes  :id, :name, :formatted_address, :avatar_url, :company_name, :company_avatar
+  attributes  :id, :name, :formatted_address, :avatar_url, :company_name, :company_avatar_url
 
   def avatar_url
     'http://lorempixel.com/50/50/cats/'
   end
 
-  def company_avatar
+  def company_avatar_url
     'http://lorempixel.com/50/50/people/'
   end
 

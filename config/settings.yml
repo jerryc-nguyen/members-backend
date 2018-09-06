@@ -1,0 +1,5 @@
+jwt:
+  hmac_secret: 'token$ecretK3y'
+  algorithm: 'HS256'
+  expired_time: 2592000 #86400*30
+

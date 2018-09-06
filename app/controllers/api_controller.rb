@@ -1,8 +1,7 @@
 class ApiController < ActionController::Base
   # before_action :maintainance_mode
 
-  before_action :set_current_user
-  # before_action :authenticate!
+  before_action :authenticate!
 
   unless Rails.application.config.consider_all_requests_local
 
