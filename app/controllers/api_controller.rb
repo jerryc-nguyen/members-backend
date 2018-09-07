@@ -89,7 +89,7 @@ class ApiController < ActionController::Base
 
   def set_current_user
     @current_user ||= begin
-      User.first
+      User.find_by_token(request.headers['X-Api-Token'].to_s)
     end
   end
 
