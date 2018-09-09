@@ -8,6 +8,11 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
 
+  scope :by_keyword, -> (keyword) {
+    if keyword.present?
+      where("LOWER(name) LIKE ?", "%#{keyword.to_s.downcase}%")
+    end
+  }
 
   def oauth_facebook
     @oauth_facebook ||= oauths.find_by_provider("facebook")

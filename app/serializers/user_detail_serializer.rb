@@ -1,0 +1,5 @@
+class UserDetailSerializer < ActorSerializer
+
+
+end
+

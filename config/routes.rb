@@ -9,7 +9,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :users, only: [:index] do
+      resources :users, only: [:index, :show] do
         collection do
           get :autocomplete
           get :current_profile
