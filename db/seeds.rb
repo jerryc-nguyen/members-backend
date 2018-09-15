@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.destroy_all
+# User.destroy_all
 
 10.times do
   u = User.create({
@@ -26,7 +26,7 @@ User.destroy_all
 
 end
 
-Post.destroy_all
+# Post.destroy_all
 
 10.times do
   u = Post.create({
@@ -37,6 +37,22 @@ Post.destroy_all
 
   if u.valid?
     p "Created post #{u.id}"
+  else
+    p u.errors.full_messages.to_sentence
+  end
+end
+
+
+20.times do
+  date = (1..10).to_a.sample.days.ago
+  u = Event.create({
+    title: Faker::Movie.quote,
+    start_date: date,
+    end_date: date + 5.days
+  })
+
+  if u.valid?
+    p "Created event #{u.id}"
   else
     p u.errors.full_messages.to_sentence
   end

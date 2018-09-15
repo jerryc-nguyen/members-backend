@@ -21,6 +21,11 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :events, only: [:index] do
+        collection do
+        end
+      end
+
     end
   end
 

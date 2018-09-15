@@ -1,8 +1,8 @@
-class PostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :thumb_url, :user, :content_excerpt
+class EventSerializer < ActiveModel::Serializer
+  attributes :id, :title, :thumb_url, :users
 
-  def user
-    User.order("random()").first.serialize
+  def users
+    User.order("random()").limit(1).map{|u| u.serialize}
   end
 
   def thumb_url
