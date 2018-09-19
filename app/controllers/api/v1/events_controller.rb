@@ -1,8 +1,8 @@
 class Api::V1::EventsController < ApiController
   skip_before_action :authenticate!
 
-  def  index
-    events = Event.paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
+  def index
+    events = Event.paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
     success(data: events)
   end
 
